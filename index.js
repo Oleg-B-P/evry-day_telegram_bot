@@ -1,30 +1,30 @@
 require('dotenv').configDotenv()
 const { Bot, GrammyError, HttpError, } = require('grammy');
-const { comamnadsReplicas, noFunctionsReplicas, } = require('./replicas.json')
+const { commanadsReplicas, unsuportedFunctionalityReplicas, } = require('./replicas.json')
 
 const bot = new Bot(process.env.BOT_API_KEY)
 
 
 
-
-
-
+bot.command('start', async (ctx) => {
+    await ctx.reply(commanadsReplicas.start)
+})
 
 bot.on('message:voice', async (ctx) => {
-    await ctx.reply(noFunctionsReplicas.voice)
+    await ctx.reply(unsuportedFunctionalityReplicas.voice)
 })
 
-// bot.on('message:text', async (ctx) => {
-//     await ctx.reply(noFunctionsReplicas.text)
-// })
+bot.on('message:text', async (ctx) => {
+    await ctx.reply(unsuportedFunctionalityReplicas.text)
+})
+
 bot.on('message:media', async (ctx) => {
-    await ctx.reply(noFunctionsReplicas.media)
+    await ctx.reply(unsuportedFunctionalityReplicas.media)
 })
 
-bot.command('start', async (ctx) => {
-    await ctx.reply(comamnadsReplicas.start)
+bot.on('message:file', async (ctx) => {
+    await ctx.reply(unsuportedFunctionalityReplicas.file)
 })
-
 
 
 bot.catch((err) => {
