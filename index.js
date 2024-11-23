@@ -10,6 +10,19 @@ bot.command('start', async (ctx) => {
     await ctx.reply(commanadsReplicas.start)
 })
 
+bot.command('hi', async (ctx) => {
+    await bot.api.sendMessage(1999101740, "hello")
+})
+
+bot.command('hi', async (ctx) => {
+    try {
+        await bot.api.sendMessage(ctx.chat.id, "hello"); // Send to the chat, not your own ID
+        console.log(ctx.chat.id); // Log the chat ID
+    } catch (error) {
+        console.error("Error sending message:", error);
+    }
+});
+
 bot.on('message:voice', async (ctx) => {
     await ctx.reply(unsuportedFunctionalityReplicas.voice)
 })
@@ -25,6 +38,9 @@ bot.on('message:media', async (ctx) => {
 bot.on('message:file', async (ctx) => {
     await ctx.reply(unsuportedFunctionalityReplicas.file)
 })
+// bot.on('message:url', async (ctx) => {
+//     await ctx.reply(unsuportedFunctionalityReplicas.url)
+// })
 
 
 bot.catch((err) => {
